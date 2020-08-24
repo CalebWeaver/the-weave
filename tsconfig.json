@@ -5,6 +5,7 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
+		"downlevelIteration": true,
     "module": "esnext",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
@@ -17,15 +18,9 @@
     ],
     "lib": [
       "es2018",
-      "dom"
+      "dom",
+			"dom.iterable"
     ],
-    "paths": {
-      "ng-emoji-translate": [
-        "dist/ng-emoji-translate"
-      ],
-      "ng-emoji-translate/*": [
-        "dist/ng-emoji-translate/*"
-      ]
-    }
+    "paths": {}
   }
 }
