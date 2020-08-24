@@ -29,7 +29,8 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+						]
           },
           "configurations": {
             "production": {
@@ -89,7 +90,8 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+						]
           }
         },
         "lint": {
@@ -115,6 +117,41 @@
             "production": {
               "devServerTarget": "weave:serve:production"
             }
+          }
+        }
+      }
+    },
+    "ngEmojiTranslate": {
+      "projectType": "library",
+      "root": "projects/ng-emoji-translate",
+      "sourceRoot": "projects/ng-emoji-translate/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-emoji-translate/tsconfig.lib.json",
+            "project": "projects/ng-emoji-translate/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-emoji-translate/src/test.ts",
+            "tsConfig": "projects/ng-emoji-translate/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-emoji-translate/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-emoji-translate/tsconfig.lib.json",
+              "projects/ng-emoji-translate/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
