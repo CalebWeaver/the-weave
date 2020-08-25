@@ -1,65 +1,70 @@
 import { Injectable } from '@angular/core';
 import {Runes, Quantities} from '../assets/Runes';
 import {Spell} from './spell';
-import SpellError from './SpellError';
-
-const quantities = {
-};
+import SpellError from './errors/SpellError';
+import RuneOrderError from './errors/RuneOrderError';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CastingService {
 
+  tecLimit: number;
+  thermalHarness: number;
+
   constructor() { }
 
   public cast(spell: Spell): string {
+
+    const defaultOutcome = 'Nothing happens.';
+
     try {
-      const tecLimit = this.getThermalEnergyConfluxLimit(spell);
-      console.log(tecLimit);
-      if (tecLimit > 50) {
-        return 'A roar of fire engulfs everything around you';
-      } else if (tecLimit > 20) {
-        return 'Flame spouts around you';
-      } else if (tecLimit > 0) {
-        return 'The air gets warmer';
+      this.tecLimit = this.getThermalEnergyConfluxLimit(spell);
+      this.thermalHarness = this.getThermalHarness(spell);
+      console.log('spellStats', this);
+      // TODO outcomes to use harness
+      if (this.tecLimit > 50) {
+        return 'A roar of fire engulfs everything around you.';
+      } else if (this.tecLimit > 20) {
+        return 'Flame spouts around you.';
+      } else if (this.tecLimit > 0) {
+        return 'The air gets warmer.';
       }
     } catch (ex) {
-      console.log(ex);
       if (ex.name === 'SpellError') {
-        return ex.message;
+        return ex.message || defaultOutcome;
       }
     }
-    return 'Nothing happens';
+    return defaultOutcome;
   }
 
   public getThermalEnergyConfluxLimit(spell: Spell): number {
     let tecLimit = 0;
-
-    const lowIndex = spell.indexOf(Runes.uvar.glyph);
-    const highIndex = spell.indexOf(Runes.ravu.glyph);
-
-    if (lowIndex > -1
-      && highIndex > -1) {
-      if (lowIndex < highIndex) {
-        tecLimit = this.getQuantity(spell.slice(lowIndex + 1, highIndex));
-      } else {
-        tecLimit = this.getQuantity(spell.slice(lowIndex + 1, highIndex)) * -1;
-        throw new SpellError('The air bites and frost clings to each part of your body. Take 1d4 cold damage.');
-      }
+    try {
+      tecLimit = this.getQuantity(spell.getBoundSegment(Runes.etli.glyph, Runes.ilte.glyph));
+    } catch (e) {
+      this.handleSpellError(e, {
+        RuneOrderError: 'The air bites and frost clings to each part of your body. Take 1d4 cold damage.'
+      });
     }
 
     return tecLimit;
   }
 
-  public getThermalHarness(spell: Spell) {
-    const lowIndex = spell.indexOf(Runes.brans.glyph);
-    const highIndex = spell.indexOf(Runes.snarb.glyph);
-
-    if (lowIndex > -1
-      && highIndex > -1) {
-      const thermalHarness = this.getQuantity(spell.slice(lowIndex + 1, highIndex));
+  public getThermalHarness(spell: Spell): number {
+    try {
+      const thermalHarnessSegment = spell.getBoundSegment(Runes.snarb.glyph, Runes.brans.glyph);
+      const harnessQuantity = this.getQuantity(thermalHarnessSegment.slice(Runes.naliti.glyph));
+      const thermalHarness = harnessQuantity / this.tecLimit;
+      return thermalHarness;
+    } catch (e) {
+      this.handleSpellError(e, {});
     }
+  }
+
+  private handleSpellError(error, messages): void {
+    console.error(error);
+    throw new SpellError(messages[error.name]);
   }
 
   getQuantity(spell: Spell): number {

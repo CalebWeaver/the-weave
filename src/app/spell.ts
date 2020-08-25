@@ -1,4 +1,7 @@
 import {Runes} from '../assets/runes';
+import RuneNotFound from './errors/RuneNotFoundError';
+import RuneNotFoundError from './errors/RuneNotFoundError';
+import RuneOrderError from './errors/RuneOrderError';
 
 export class Spell {
   spell: string[];
@@ -55,6 +58,30 @@ export class Spell {
 
   public indexOf(rune: string) {
     return this.spell.indexOf(rune);
+  }
+
+  public getBoundSegment(beginRune: string, endRune: string): Spell {
+
+    const lowIndex = this.indexOf(beginRune);
+    const highIndex = this.indexOf(endRune);
+
+    if (lowIndex > -1
+      && highIndex > -1) {
+      if (highIndex > lowIndex) {
+        return this.slice(lowIndex + 1, highIndex);
+      } else {
+        throw new RuneOrderError('Bounding runes out of order');
+      }
+    } else {
+      let errorMessage = 'Rune(s) not found: ';
+      if (lowIndex === -1) {
+        errorMessage += beginRune;
+      }
+      if (highIndex === -1) {
+        errorMessage += endRune;
+      }
+      throw new RuneNotFoundError(errorMessage);
+    }
   }
 
   public slice(start?: number, end?: number): Spell {
