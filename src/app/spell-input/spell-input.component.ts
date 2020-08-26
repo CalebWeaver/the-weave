@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, Input, OnInit, Output, ViewChildren} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {CastingService} from '../casting.service';
-import {Spell} from '../spell';
+import {CastingService} from '../services/casting.service';
+import {Spell} from '../classes/spell';
 
 @Component({
   selector: 'app-spell-input',

@@ -1,7 +1,7 @@
-import {Runes} from '../assets/runes';
-import RuneNotFound from './errors/RuneNotFoundError';
-import RuneNotFoundError from './errors/RuneNotFoundError';
-import RuneOrderError from './errors/RuneOrderError';
+import {Runes} from '../../assets/runes';
+import RuneNotFound from '../errors/RuneNotFoundError';
+import RuneNotFoundError from '../errors/RuneNotFoundError';
+import RuneOrderError from '../errors/RuneOrderError';
 
 export class Spell {
   spell: string[];

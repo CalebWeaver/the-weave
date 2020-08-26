@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Runes, Quantities} from '../assets/Runes';
-import {Spell} from './spell';
-import SpellError from './errors/SpellError';
-import RuneOrderError from './errors/RuneOrderError';
+import {Runes, Quantities} from '../../assets/runes';
+import {Spell} from '../classes/spell';
+import SpellError from '../errors/SpellError';
+import RuneOrderError from '../errors/RuneOrderError';
 
 @Injectable({
   providedIn: 'root'

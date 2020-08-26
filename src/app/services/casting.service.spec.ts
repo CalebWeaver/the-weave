@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { CastingService } from './casting.service';
-import {Spell} from './spell';
+import {Spell} from '../classes/spell';
 
 describe('CastingService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

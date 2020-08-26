@@ -1,2 +1,5 @@
-<app-spell-input>
+<app-spell-input *ngIf="!showGuide">
 </app-spell-input>
+<app-guide *ngIf="showGuide">
+</app-guide>
+<button (click)="showGuide = !showGuide" class="guide-toggle">Guide</button>

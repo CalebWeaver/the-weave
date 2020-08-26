@@ -5,11 +5,15 @@ import { AppComponent } from './app.component';
 import { SpellInputComponent } from './spell-input/spell-input.component';
 import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { GuideComponent } from './guide/guide.component';
+import { RuneGlyphComponent } from './guide/rune-glyph/rune-glyph.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SpellInputComponent
+    SpellInputComponent,
+    GuideComponent,
+    RuneGlyphComponent
   ],
   imports: [
     BrowserModule,
