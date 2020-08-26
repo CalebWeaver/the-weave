@@ -1,8 +1,8 @@
 export const Runes = {
-	uvar: {
+	etli: {
 		glyph: "⏂"
 	},
-	ravu: {
+	ilte: {
 		glyph: "⏁"
 	},
 	brans: {
