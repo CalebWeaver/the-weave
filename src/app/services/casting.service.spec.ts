@@ -12,7 +12,7 @@ describe('CastingService', () => {
   });
 
   it('should be valid', () => {
-    const validSpell = '⏅⏣⎧⏄⏂⎧⎧⎧⏁';
+    const validSpell = '⎈⍡⎧⍑⍄⏣⏅⍢⎧⏄⏂⎧⎧⎧⏁';
     const service: CastingService = TestBed.get(CastingService);
     expect(service.cast(new Spell(validSpell))).toBeTruthy();
   });

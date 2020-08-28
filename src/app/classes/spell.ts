@@ -93,4 +93,21 @@ export class Spell {
       return this.spell.map(action);
     }
   }
+
+  public getCoord(beginRune: string, endRune?: string): number {
+
+    const lowIndex = this.indexOf(beginRune);
+    if (!endRune) {
+      return lowIndex;
+    } else {
+      const highIndex = this.indexOf(endRune);
+      if (highIndex > lowIndex
+        && lowIndex > -1
+        && highIndex > -1) {
+        return lowIndex;
+      } else {
+        return -1;
+      }
+    }
+  }
 }

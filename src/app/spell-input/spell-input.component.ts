@@ -25,10 +25,17 @@ import {Spell} from '../classes/spell';
 export class SpellInputComponent implements OnInit {
 
   spell = new Spell();
+  spellText = '';
   result: string;
   isCasting = false;
 
-  constructor(private caster: CastingService) {}
+  constructor(private caster: CastingService) {
+    const storedSpell = localStorage.getItem('spell');
+    if (storedSpell) {
+      this.spell = new Spell(storedSpell);
+      this.spellText = storedSpell;
+    }
+  }
 
   ngOnInit() {}
 
@@ -41,7 +48,8 @@ export class SpellInputComponent implements OnInit {
   public handleSpellInput(event: KeyboardEvent): void {
     const target = event.target as HTMLTextAreaElement;
 
-    this.spell.read(target.value);
-    target.value = this.spell.toString();
+    this.spell.read(target.value.toLowerCase());
+    this.spellText = this.spell.toString();
+    localStorage.setItem('spell', target.value);
   }
 }

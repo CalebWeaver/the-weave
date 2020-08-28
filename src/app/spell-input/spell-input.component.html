@@ -1,5 +1,5 @@
 <div class="container">
-	<textarea (keyup)="handleSpellInput($event)" class="spell-input" spellcheck="false" autofocus></textarea>
+	<textarea (keyup)="handleSpellInput($event)" [value]="spellText" class="spell-input" spellcheck="false" autofocus autocorrect="off" autocapitalize="off"></textarea>
 	<button (click)="cast()" class="cast-button">Cast</button>
 	<div class="result" [@newCast]="isCasting ? 'casting' : 'castComplete'">{{result}}</div>
 </div>

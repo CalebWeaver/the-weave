@@ -9,10 +9,12 @@ import {Runes} from '../../../assets/Runes.js';
 export class RuneGlyphComponent implements OnInit {
 
   rune: string;
+  name: string;
 
   @Input()
   set runeName(name: string) {
     this.rune = Runes[name].glyph;
+    this.name = name;
   }
 
   constructor() { }

@@ -12,7 +12,25 @@ export const Runes = {
 		glyph: "⏅"
 	},
 	naliti: {
+		glyph: "⍢"
+	},
+	keso: {
+		glyph: "⎈"
+	},
+	osek: {
 		glyph: "⏣"
+	},
+	horum: {
+		glyph: "⍡"
+	},
+	muroh: {
+		glyph: "⍑"
+	},
+	pentro: {
+		glyph: "⍃"
+	},
+	asero: {
+		glyph: "⍄"
 	},
 	esi: {
 		glyph: "⎧",
