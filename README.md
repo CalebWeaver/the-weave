@@ -1,4 +1,4 @@
-# The Weave
+# [The Weave](http://castaspell.calebweaver.xyz)
 
 Inspired by the post "Wizards have the same trust in magic that software designers have in software, which is to say, almost none at all." - AnthraxLobster.
 
